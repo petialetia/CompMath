@@ -4,6 +4,8 @@ import math
 def main():
     print(solveSLAECholesky(numpy.array([[1, 0], [0, 1]]), [5, 6]))
 
+    #assert((solveSLAECholesky(numpy.array([[1, 0], [0, 1]]), [5, 6]) == [5, 6]).all())
+
     return 0
 
 def solveSLAELowerTriangular(coefficients_matrix, constant_terms):
@@ -54,6 +56,14 @@ def factorizeMatrixCholesky(matrix):
     factorization = numpy.zeros(matrix.shape)
 
     for i in range(matrix_dimensionality):
+        for j in range(i):
+            factorization[i][j] = (matrix[i][j] - \
+                    sum(factorization[i][k] * factorization[j][k] for k in range(j))) / \
+                    factorization[j][j]
+        factorization[i][i] = math.sqrt(matrix[i][i] - \
+                sum(factorization[i][j] ** 2 for j in range(i)))
+
+    """for i in range(matrix_dimensionality):
         sum = 0
 
         for j in range(i):
@@ -68,7 +78,7 @@ def factorizeMatrixCholesky(matrix):
             for k in range(j):
                 sum += factorization[i][k] * factorization[j][k]
 
-            factorization[i][j] = (matrix[i][j] - sum) / factorization[j][j]
+            factorization[i][j] = (matrix[i][j] - sum) / factorization[j][j]"""
 
     return factorization
 
