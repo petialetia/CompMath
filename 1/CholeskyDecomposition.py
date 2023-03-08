@@ -2,12 +2,12 @@ import numpy
 import math
 
 def main():
-    print(solveSLAECholesky(numpy.matrix('1 0; 0 1'), [5, 6]))
+    print(solveSLAECholesky(numpy.array([[1, 0], [0, 1]]), [5, 6]))
 
     return 0
 
 def solveSLAELowerTriangular(coefficients_matrix, constant_terms):
-    result = numpy.zeroes(constant_terms.size())
+    result = numpy.zeros(constant_terms.size())
     
     for i in range(constant_terms.size()):
         sum = 0
@@ -20,7 +20,7 @@ def solveSLAELowerTriangular(coefficients_matrix, constant_terms):
     return result
 
 def solveSLAEUpperLowerTriangular(coefficients_matrix, constant_terms):
-    result = numpy.zeroes(constant_terms.size())
+    result = numpy.zeros(constant_terms.size())
     
     for i in (range(constant_terms.size())).reversed():
         sum = 0
