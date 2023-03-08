@@ -7,25 +7,28 @@ def main():
     return 0
 
 def solveSLAELowerTriangular(coefficients_matrix, constant_terms):
-    result = numpy.zeros(constant_terms.size())
+    #print(coefficients_matrix)
     
-    for i in range(constant_terms.size()):
+    result = numpy.zeros(len(constant_terms))
+    
+    for i in range(len(constant_terms)):
         sum = 0
 
         for j in range(i):
             sum += result[j] * coefficients_matrix[i][j]
 
+        #print(coefficients_matrix[i][i])
         result[i] = (constant_terms[i] - sum) / coefficients_matrix[i][i]
 
     return result
 
 def solveSLAEUpperLowerTriangular(coefficients_matrix, constant_terms):
-    result = numpy.zeros(constant_terms.size())
+    result = numpy.zeros(len(constant_terms))
     
-    for i in (range(constant_terms.size())).reversed():
+    for i in reversed(range(len(constant_terms))):
         sum = 0
 
-        for j in range(i, constant_terms.size()):
+        for j in range(i, len(constant_terms)):
             sum += result[j] * coefficients_matrix[i][j]
 
         result[i] = (constant_terms[i] - sum) / coefficients_matrix[i][i]
@@ -33,6 +36,7 @@ def solveSLAEUpperLowerTriangular(coefficients_matrix, constant_terms):
     return result
 
 def solveSLAECholesky(coefficients_matrix, constant_terms):
+    #print(numpy.linalg.cholesky(coefficients_matrix))
     factorization = factorizeMatrixCholesky(coefficients_matrix)
 
     itermidiate_constant_terms = solveSLAELowerTriangular(factorization, constant_terms)
@@ -43,6 +47,7 @@ def solveSLAECholesky(coefficients_matrix, constant_terms):
 def factorizeMatrixCholesky(matrix):
     assert(len(matrix.shape) == 2)
     assert(matrix.shape[0] == matrix.shape[1])
+    assert(numpy.all(numpy.linalg.eigvals(matrix) > 0))
 
     matrix_dimensionality = (matrix.shape)[0]
 
@@ -52,7 +57,7 @@ def factorizeMatrixCholesky(matrix):
         sum = 0
 
         for j in range(i):
-            sum += factorization[j][j] ** 2
+            sum += factorization[i][j] ** 2
 
         factorization[i][i] = math.sqrt(matrix[i][i] - sum)
 
