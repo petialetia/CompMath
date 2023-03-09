@@ -21,7 +21,7 @@ class CholeskyDecompositionTestCase(unittest.TestCase):
                 numpy.linalg.cholesky(coefficients_matrix)).all())
        
        result = solveSLAECholesky(coefficients_matrix, constant_terms)
-       self.assertTrue(numpy.allclose(result, [0.66666667, 1.66666667]))
+       self.assertTrue(numpy.allclose(result, [2 / 3, 5 / 3]))
 
 if __name__ == "__main__":
     unittest.main()
