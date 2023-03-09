@@ -8,27 +8,23 @@ def main():
 
 def solveSLAELowerTriangular(coefficients_matrix, constant_terms):
     result = numpy.zeros(len(constant_terms))
+    dimensionality = len(constant_terms)
     
-    for i in range(len(constant_terms)):
-        sum = 0
-
-        for j in range(i):
-            sum += result[j] * coefficients_matrix[i][j]
-
-        result[i] = (constant_terms[i] - sum) / coefficients_matrix[i][i]
+    for i in range(dimensionality):
+        result[i] = (constant_terms[i] - \
+                sum(result[j] * coefficients_matrix[i][j] for j in range(i))) / \
+                coefficients_matrix[i][i]
 
     return result
 
 def solveSLAEUpperLowerTriangular(coefficients_matrix, constant_terms):
     result = numpy.zeros(len(constant_terms))
+    dimensionality = len(constant_terms)
     
-    for i in reversed(range(len(constant_terms))):
-        sum = 0
-
-        for j in range(i, len(constant_terms)):
-            sum += result[j] * coefficients_matrix[i][j]
-
-        result[i] = (constant_terms[i] - sum) / coefficients_matrix[i][i]
+    for i in reversed(range(dimensionality)):
+        result[i] = (constant_terms[i] - \
+                sum(result[j] * coefficients_matrix[i][j] for j in range(i, dimensionality))) / \
+                coefficients_matrix[i][i]
 
     return result
 
