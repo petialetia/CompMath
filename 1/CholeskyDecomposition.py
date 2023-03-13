@@ -40,6 +40,7 @@ def factorizeMatrixCholesky(matrix):
     assert(len(matrix.shape) == 2)
     assert(matrix.shape[0] == matrix.shape[1])
     assert(numpy.all(numpy.linalg.eigvals(matrix) > 0))
+    assert((matrix == matrix.transpose()).all())
 
     matrix_dimensionality = (matrix.shape)[0]
 

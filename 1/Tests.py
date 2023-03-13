@@ -11,7 +11,7 @@ class CholeskyDecompositionTestCase(unittest.TestCase):
                 numpy.linalg.cholesky(coefficients_matrix)).all())
        
        result = solveSLAECholesky(coefficients_matrix, constant_terms)
-       self.assertTrue((result == [5, 6]).all())
+       self.assertTrue(numpy.allclose(result, [5, 6]))
 
     def testSimpleMatrix(self):
        coefficients_matrix = numpy.array([[2, 1], [1, 2]])
