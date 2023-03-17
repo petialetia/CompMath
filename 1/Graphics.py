@@ -53,15 +53,7 @@ def main():
     ax.plot(dimensionalitys, means)
 
     ax.set_xlabel("Размерность")
-    ax.set_ylabel("Среднее время подсчёта")
-
-    """plt.legend(loc="best")
-
-    ax.set_ylim(bottom=0)
-    ax.set_xlim(left=0)
-
-    plt.gca().set_aspect("equal", adjustable="box")
-    plt.xticks(range(0, 9, 1))"""
+    ax.set_ylabel("Среднее время решения СЛАУ")
 
     plt.savefig('graphics.pdf')
 
