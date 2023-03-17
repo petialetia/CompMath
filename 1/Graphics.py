@@ -7,7 +7,7 @@ from CholeskyDecomposition import *
 
 def main():
     means = []
-    dimensionalitys = [3, 10, 50, 100, 250, 500, 750, 1000]
+    dimensionalitys = [3, 10, 50, 100, 250, 500, 750, 1000, 1250, 1500]
 
     for dimensionality in dimensionalitys:
         time = []
