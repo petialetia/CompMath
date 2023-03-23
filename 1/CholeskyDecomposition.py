@@ -29,7 +29,6 @@ def solveSLAEUpperLowerTriangular(coefficients_matrix, constant_terms):
     return result
 
 def solveSLAECholesky(coefficients_matrix, constant_terms):
-    #assert(numpy.linalg.det(coefficients_matrix) != 0)
     factorization = factorizeMatrixCholesky(coefficients_matrix)
 
     itermidiate_constant_terms = solveSLAELowerTriangular(factorization, constant_terms)
