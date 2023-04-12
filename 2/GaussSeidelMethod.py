@@ -17,6 +17,10 @@ def solveSLAEGaussSeidel(coefficients_matrix, constant_terms, start_assumption =
     current_answer = start_assumption
 
     for _ in itertools.count() if max_iteration is None else range(max_iteration):
+        if (numpy.allclose(coefficients_matrix @ current_answer, constant_terms, \
+                atol = target_residual)):
+            break
+        
         next_step_answer = numpy.zeros(dimensionality)
 
         for i in range(len(constant_terms)):
@@ -26,10 +30,6 @@ def solveSLAEGaussSeidel(coefficients_matrix, constant_terms, start_assumption =
                     i + 1, dimensionality))) / coefficients_matrix[i][i]
             
         current_answer = next_step_answer
-
-        if (numpy.allclose(coefficients_matrix @ current_answer, constant_terms, \
-                atol = target_residual)):
-            break
 
     return current_answer
 
