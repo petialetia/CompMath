@@ -7,10 +7,8 @@ class Point:
         self.value = value
 
 def main():
-    # points = [Point(1,1), Point(2, 3), Point(3, 1)]
-    # print(getDividedDifferences(points))
-
-    print(interpolateNewton([Point(-1, 0), Point(0, 1), Point(1, 0)], [-3, -2, -1, 0, 1, 2, 3]))
+    print(interpolateNewton([Point(-1, 0), Point(0, 1), Point(1, 0)], \
+            [-4, -3, -2, -1, 0, 1, 2, 3, 4]))
 
 def interpolateNewton(points, arguments):
     divided_differences = getDividedDifferences(points)
