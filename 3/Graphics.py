@@ -54,6 +54,8 @@ def drawInterpolation(function, nodes_of_interpolation, arguments, file_name):
 
     fig, ax = plt.subplots()
 
+    ax.set_ylim([-0.5, 1.5])
+
     ax.plot(arguments, [function(argument) for argument in arguments], \
             linestyle = "-", color = "r")
     ax.plot(arguments, values, linestyle = "--", color = "b")
