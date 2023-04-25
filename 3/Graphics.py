@@ -11,6 +11,9 @@ def main():
     square_function = lambda x: x ** 2
     square_function_derivative = lambda x: 2 * x
 
+    omega_function = lambda nodes_of_interpolation, x: \
+            numpy.prod(numpy.array(nodes_of_interpolation) - x)
+
     left_border = -1
     right_border = 1
     n_interpolation_nodes = 15
@@ -25,7 +28,7 @@ def main():
     drawInterpolation(runge_function, \
             getPoints(runge_function, left_border, right_border, \
             n_interpolation_nodes, getArgumentsChebyshev), \
-            getArgumentsChebyshev(left_border, right_border, n_graphic_points), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
             "ChebyshevRunge.pdf", [-0.5, 1.5])
     
     drawInterpolation(runge_function_derivative, \
@@ -37,7 +40,7 @@ def main():
     drawInterpolation(runge_function_derivative, \
             getPoints(runge_function_derivative, left_border, right_border, \
             n_interpolation_nodes, getArgumentsChebyshev), \
-            getArgumentsChebyshev(left_border, right_border, n_graphic_points), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
             "ChebyshevRungeDerivative.pdf", [-3.5, 3.5])
     
     drawInterpolation(square_function, \
@@ -49,7 +52,7 @@ def main():
     drawInterpolation(square_function, \
             getPoints(square_function, left_border, right_border, \
             n_interpolation_nodes, getArgumentsChebyshev), \
-            getArgumentsChebyshev(left_border, right_border, n_graphic_points), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
             "ChebyshevSquare.pdf", [-0.5, 1.5])
     
     drawInterpolation(square_function_derivative, \
@@ -61,9 +64,19 @@ def main():
     drawInterpolation(square_function_derivative, \
             getPoints(square_function_derivative, left_border, right_border, \
             n_interpolation_nodes, getArgumentsChebyshev), \
-            getArgumentsChebyshev(left_border, right_border, n_graphic_points), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
             "ChebyshevSquareDerivative.pdf", [-2.5, 2.5])
     
+    drawFunction(lambda x: omega_function(getArgumentsUniform( \
+            left_border, right_border, n_interpolation_nodes), x), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
+            "UniformOmegaFunction.pdf")
+    
+    drawFunction(lambda x: omega_function(getArgumentsChebyshev( \
+            left_border, right_border, n_interpolation_nodes), x), \
+            getArgumentsUniform(left_border, right_border, n_graphic_points), \
+            "ChebyshevOmegaFunction.pdf")
+
     return 0
 
 def getArgumentsUniform(left_border, right_border, num):
@@ -104,6 +117,13 @@ def drawInterpolation(function, nodes_of_interpolation, arguments, file_name, li
             [point.value for point in nodes_of_interpolation], 
             marker = "o", linestyle = "", color = "b")
 
+    plt.savefig(file_name)
+
+def drawFunction(function, arguments, file_name):
+    fig, ax = plt.subplots()
+
+    ax.plot(arguments, [function(argument) for argument in arguments])
+    
     plt.savefig(file_name)
 
 if __name__ == "__main__":
